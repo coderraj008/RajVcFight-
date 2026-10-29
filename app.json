@@ -1,0 +1,71 @@
+{
+  "name": "tg-bridge-calls",
+  "description": "Telegram voice chat bridge worker (record + playback broadcast).",
+  "keywords": [
+    "telegram",
+    "voice-chat",
+    "pyrogram",
+    "pytgcalls",
+    "worker"
+  ],
+  "stack": "heroku-24",
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "env": {
+    "API_ID": {
+      "description": "Telegram API ID (integer).",
+      "required": true
+    },
+    "API_HASH": {
+      "description": "Telegram API hash.",
+      "required": true
+    },
+    "BOT_TOKEN": {
+      "description": "Telegram bot token.",
+      "required": true
+    },
+    "OWNER_ID": {
+      "description": "Telegram user ID allowed to control commands (integer).",
+      "required": true
+    },
+    "LOGGER_ID": {
+      "description": "Source logger group/chat ID where recording VC runs (integer).",
+      "required": true
+    },
+    "STRING_SESSION": {
+      "description": "Pyrogram v2 string session.",
+      "required": true 
+    },
+    "SUPPORT_CHANNEL": {
+      "description": "Public channel URL shown in /start button.",
+      "required": false,
+      "value": "https://t.me/TwsAssociation"
+    },
+    "SUPPORT_GROUP": {
+      "description": "Support group URL shown in /start button.",
+      "required": false,
+      "value": "https://t.me/TwsSupportGroup"
+    },
+    "START_IMAGE": {
+      "description": "Optional image URL/file_id for /start panel.",
+      "required": false
+    },
+    "F": {
+      "description": "Enable FFmpeg realtime audio path (`1` = enabled, otherwise disabled).",
+      "required": false,
+      "value": "0"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-activestorage-preview"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ]
+}

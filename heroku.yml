@@ -1,0 +1,5 @@
+setup:
+  stack: heroku-24
+
+run:
+  worker: python -m main

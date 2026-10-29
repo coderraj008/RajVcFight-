@@ -1,0 +1,46 @@
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+def _required_env(name: str) -> str:
+    value = os.getenv(name)
+    if value is None or value.strip() == "":
+        raise SystemExit(f"FATAL: Missing required environment variable `{name}`.")
+    return value
+
+
+def _required_int_env(name: str) -> int:
+    value = _required_env(name)
+    try:
+        return int(value)
+    except ValueError as exc:
+        raise SystemExit(f"FATAL: Environment variable `{name}` must be an integer.") from exc
+
+
+def _optional_env(name: str, default: str) -> str:
+    value = os.getenv(name)
+    if value is None or value.strip() == "":
+        return default
+    return value.strip()
+
+
+API_ID = _required_int_env("API_ID")
+API_HASH = _required_env("API_HASH")
+
+BOT_TOKEN = _required_env("BOT_TOKEN")
+STRING_SESSION = _required_env("BQIHIFMAeUo24j99N9jkezndF2HNGgxfNPgYpYHlBBdN3i4WoV4IBuxsTtL_RFQwk4XbYvwh9HGR1OQNy2jmn4PBB0kmafD7Z9q2t8ymcxFIhS3iEcAv-XgorbVtylgOE5v-NHPxauvqcKLIU_pudaBMLVr3mRIxln2qJIC3uHVcQjlteutMiaWqFu8JtXX9KDkZO4M92hD8RX3iJ9kFucQZNytEFeaaFLdryhTdNIRX5ayoCwYKkKLxPAfB0qYIY5A46LYkFpSEVTmaHpNIIMdGn_jC_9eRNcxb6WjXEdMKFUcueztRKbeMx725I8C5p-MVua6BlL02wZKdNGLbfEMu4ekGlgAAAAGTJzViAA")
+MONGO_URI = _required_env("mongodb+srv://patelgyts_db_user:Test%4012345@patel.hf7pz9s.mongodb.net/patel?appName=patel")
+MONGO_DB_NAME = _optional_env("MONGO_DB_NAME", "tg_bridge_calls")
+
+OWNER_ID = _required_int_env("8798219147")
+LOGGER_ID = _required_int_env("-1005164266634")
+
+SUPPORT_CHANNEL = _optional_env("SUPPORT_CHANNEL", "https://t.me/TwsAssociation")
+SUPPORT_GROUP = _optional_env("SUPPORT_GROUP", "https://t.me/TwsSupportGroup")
+START_IMAGE = os.getenv("START_IMAGE", "").strip() or None
+
+# Agar lag ho toh ye lagao, quality me jyada farq nahi dikhega aur stream makkhan chalegi
+AUDIO_BITRATE = 128000
+AUDIO_CHANNELS = 2

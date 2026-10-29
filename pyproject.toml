@@ -1,0 +1,49 @@
+[project]
+name = "tg-bridge-calls"
+version = "0.1.0"
+description = "Telegram VC bridge — record + broadcast"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "kurigram[fast]>=2.2.22",
+    "py-tgcalls",
+    "numpy>=2.0",
+    "pillow>=10.0",
+    "python-dotenv>=1.0",
+    "pymongo>=4.8",
+]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "RUF", # ruff-specific rules
+]
+ignore = [
+    "E501",  # line too long — ruff format handles this
+]
+
+[tool.ruff.lint.isort]
+known-first-party = [
+    "audio",
+    "bridge",
+    "chat_state",
+    "clients",
+    "commands",
+    "config",
+    "main",
+    "room_state",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
